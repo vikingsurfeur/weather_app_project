@@ -4,7 +4,6 @@
     * API : OPEN WEATHER API
 **/
 
-
 const
     cityValue               = document.querySelector('#city__value'),
     weatherDisplay          = document.querySelector('.main__weather__data'),
