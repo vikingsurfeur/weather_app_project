@@ -23,7 +23,10 @@ const
     south       = 160,
     southWest   = 200,
     west        = 250,
-    northWest   = 290;
+    northWest   = 290,
+    rainLight   = ['light rain', 'moderate rain'],
+    rainShower  = ['light intensity shower rain', 'shower rain', 'heavy intensity shower rain', 'ragged shower rain'],
+    rainHeavy   = ['heavy intensity rain', 'very heavy rain'];
 
 let city        = cityValue.value;
 
@@ -93,29 +96,10 @@ const getApiDataCallHandler = () => {
     // GET WEATHER CONDITION
 
     const getApiWeatherDataCall = getApiCallHandler(urlCurrentWeatherRequest).then((response) => {
-        response.weather.forEach((cloud) => {
-            switch (cloud.main) {
+        response.weather.forEach((weather) => {
+            switch (weather.main) {
                 case 'Clouds':
-                    switch (cloud.description) {
-                        case 'overcast clouds':
-                            weatherDisplay.textContent = 'Super Caca'
-                            break;
-
-                        case 'broken clouds':
-                            weatherDisplay.textContent = 'Mostly Caca'
-                            break;
-
-                        case 'scattered clouds':
-                            weatherDisplay.textContent = 'Caca'
-                            break;
-                        
-                        case 'few clouds':
-                            weatherDisplay.textContent = 'Lightly Caca'
-                            break;
-
-                        default:
-                            break;
-                    }
+                    getSortCloudyWeather(weather.description); // MERCI JULIEN FUMARD...
                     break;
                 
                 case 'Clear':
@@ -131,14 +115,8 @@ const getApiDataCallHandler = () => {
                     break;
 
                 case 'Rain':
-                    switch (key) {
-                        case value:
-                            
-                            break;
-                    
-                        default:
-                            break;
-                    }
+                    getSortRainyWeather(weather.description);
+                    break;
 
                 case 'Drizzle':
                     weatherDisplay.textContent = 'Bruine';
@@ -156,6 +134,39 @@ const getApiDataCallHandler = () => {
 
     return getApiGlobalDataCallHandler, getApiWindDataCall, getApiWeatherDataCall;
 };
+
+// FUNCTION SORT CLOUDY WEATHER
+
+function getSortCloudyWeather(cloudyWeather) {
+    switch (cloudyWeather) {
+        case 'overcast clouds':
+            return (weatherDisplay.textContent = 'Super Caca');
+
+        case 'broken clouds':
+            return (weatherDisplay.textContent = 'Mostly Caca');
+
+        case 'scattered clouds':
+            return (weatherDisplay.textContent = 'Caca');
+
+        case 'few clouds':
+            return (weatherDisplay.textContent = 'Lightly Caca');
+
+        default:
+            break;
+    }
+}
+
+// FUNCTION SORT RAINY WEATHER
+
+function getSortRainyWeather(rainyWeather) {
+    if (rainyWeather.includes(rainLight)) {
+        return (weatherDisplay.textContent = 'pluie légère');
+    } else if (rainyWeather.includes(rainShower)) {
+        return (weatherDisplay.textContent = 'averses de pluie');
+    } else {
+        return (weatherDisplay.textContent = 'forte pluie');
+    }
+}
 
 // CALL FUNCTIONS
 
