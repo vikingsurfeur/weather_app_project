@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fetch API / JSON</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+
+        <form class="form__city">
+            <label for="city__value">Choisissez votre localité</label>
+            <select name="city__value" id="city__value" class="form__city__select">
+                <option value="Carpentras" selected>Carpentras</option>
+                <option value="Avignon">Avignon</option>
+                <option value="Cavaillon">Cavaillon</option>
+                <option value="Pertuis">Pertuis</option>
+            </select>
+        </form>
+
+        <main class="main">
+            <section class="main__weather">
+                <h4 class="main__weather__title">Température ressentie</h4>
+                <!-- <img src="" alt="icon of current weather" class="main__weather__data"> -->
+                <p class="main__weather__data"></p>
+            </section>
+            <section class="main__temp">
+                <h4 class="main__temp__title">Température ressentie</h4>
+                <p class="main__temp__data"></p>
+            </section>
+            <section class="main__pressure">
+                <h4 class="main__pressure__title">Pression athmosphérique</h4>
+                <p class="main__pressure__data"></p>
+            </section>
+            <section class="main__humidity">
+                <h4 class="main__humidity__title">Humidité ambiante</h4>
+                <p class="main__humidity__data"></p>
+            </section>
+            <section class="main__wind__speed">
+                <h4 class="main__wind__speed__title">Vitesse du vent</h4>
+                <p class="main__wind__speed__data"></p>
+            </section>
+            <section class="main__wind__direction">
+                <h4 class="main__wind__direction__title">Direction du vent</h4>
+                <p class="main__wind__direction__data"></p>
+            </section>
+            <section class="main__wind__gust">
+                <h4 class="main__wind__gust__title">Rafale</h4>
+                <p class="main__wind__gust__data"></p>
+            </section>
+        </main>
+
+        <script src="app.js"></script>
+    </body>
+</html>
