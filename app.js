@@ -1,3 +1,10 @@
+/** 
+    * WEATHER APP PROJECT
+    * AUTHOR : DAVID BOUSCARLE
+    * API : OPEN WEATHER API
+**/
+
+
 const
     cityValue               = document.querySelector('#city__value'),
     weatherDisplay          = document.querySelector('.main__weather__data'),
@@ -6,7 +13,9 @@ const
     humidityDisplay         = document.querySelector('.main__humidity__data'),
     windSpeedDisplay        = document.querySelector('.main__wind__speed__data'),
     windDirectionDisplay    = document.querySelector('.main__wind__direction__data'),
-    windGustDisplay         = document.querySelector('.main__wind__gust__data');
+    windGustDisplay         = document.querySelector('.main__wind__gust__data'),
+    sunriseDisplay          = document.querySelector('.main__sunrise__data'),
+    sunsetDisplay           = document.querySelector('.main__sunset__data');
 
 // API VARIABLES
 
@@ -39,6 +48,21 @@ let urlCurrentWeatherRequest=
     units +
     '&appid=ce901c6857cf6809af1d9e7195187878';
 
+// LISTENERS
+
+cityValue.addEventListener('change', () => {
+    city = cityValue.options[cityValue.selectedIndex].text;
+    
+    urlCurrentWeatherRequest =
+        'https://api.openweathermap.org/data/2.5/weather?q=' +
+        city +
+        '&units=' +
+        units +
+        '&appid=ce901c6857cf6809af1d9e7195187878';
+
+    getApiDataCallHandler();
+});
+
 // FUNCTIONS
 
 const getApiDataCallHandler = () => {
@@ -52,13 +76,13 @@ const getApiDataCallHandler = () => {
         }
     };
     
-    // TEMPORARY DEBUG
+    // // TEMPORARY DEBUG
 
-    console.log(getApiCallHandler(urlCurrentWeatherRequest))
+    // console.log(getApiCallHandler(urlCurrentWeatherRequest))
 
     // GET GLOBAL DATA ABOUT TEMP, PRESSURE AND HUMIDITY
 
-    const getApiGlobalDataCallHandler = getApiCallHandler(urlCurrentWeatherRequest).then((response) => {
+    const getApiGlobalDataCall      = getApiCallHandler(urlCurrentWeatherRequest).then((response) => {
         tempDisplay.textContent     = response.main.feels_like + celsius;
         pressureDisplay.textContent = response.main.pressure + hectoPascal;
         humidityDisplay.textContent = response.main.humidity + percent;
@@ -99,9 +123,9 @@ const getApiDataCallHandler = () => {
         response.weather.forEach((weather) => {
             switch (weather.main) {
                 case 'Clouds':
-                    getSortCloudyWeather(weather.description); // MERCI JULIEN FUMARD...
+                    getSortCloudyWeather(weather.description);
                     break;
-                
+
                 case 'Clear':
                     weatherDisplay.textContent = 'super beau';
                     break;
@@ -132,8 +156,29 @@ const getApiDataCallHandler = () => {
         });
     });
 
-    return getApiGlobalDataCallHandler, getApiWindDataCall, getApiWeatherDataCall;
+    // GET SUNRISE HOUR
+
+    const getApiSunriseHourCallData = getApiCallHandler(urlCurrentWeatherRequest).then((response) => {
+        getSunriseSunsetHour(response.sys.sunrise);
+    });
+
+    // GET SUNSET HOUR
+
+    const getApiSunsetHourCallData = getApiCallHandler(urlCurrentWeatherRequest).then((response) => {
+        getSunriseSunsetHour(response.sys.sunset);
+    });
+
+    return 
+        getApiGlobalDataCall, 
+        getApiWindDataCall, 
+        getApiWeatherDataCall, 
+        getApiSunriseHourCallData, 
+        getApiSunsetHourCallData;
 };
+
+// INITIALIZING THE APP
+
+getApiDataCallHandler();
 
 // FUNCTION SORT CLOUDY WEATHER
 
@@ -168,23 +213,21 @@ function getSortRainyWeather(rainyWeather) {
     }
 }
 
-// CALL FUNCTIONS
+// FUNCTION SUNRISE / SUNSET HOUR
 
-getApiDataCallHandler();
+function getSunriseSunsetHour(hour) {
+    let unixTimeStamp = hour;
+    let milliSeconds = unixTimeStamp * 1000;
+    let hourObject = new Date(milliSeconds);
+    let humanFriendlyHour = hourObject.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 
-// LISTENERS
-
-cityValue.addEventListener('change', () => {
-    city = cityValue.options[cityValue.selectedIndex].text;
-    
-    urlCurrentWeatherRequest =
-        'https://api.openweathermap.org/data/2.5/weather?q=' +
-        city +
-        '&units=' +
-        units +
-        '&appid=ce901c6857cf6809af1d9e7195187878';
-
-    getApiDataCallHandler();
-});
-
+    if (humanFriendlyHour <= '12:00') {
+        return sunriseDisplay.textContent = humanFriendlyHour;
+    } else {
+        return sunsetDisplay.textContent = humanFriendlyHour;
+    }
+};
 
