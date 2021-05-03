@@ -1,0 +1,44 @@
+.form__city {
+    margin: 2.5rem;
+
+    &__select {
+        padding: 0.5rem;
+        margin-top: 1.5rem;
+    }
+}
+
+.main {
+
+    &__global__data {
+        margin: 5rem 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    &__wind {
+        margin: 2.5rem 0 5rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        &__speed,
+        &__direction,
+        &__gust {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__sunrise,
+    &__sunset {
+        padding: 2.5rem;
+        display: flex;
+        align-items: flex-end;
+
+        &__data {
+            margin-left: 2rem;
+        }
+    }
+}

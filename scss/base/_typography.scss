@@ -1,0 +1,17 @@
+// FONT SIZE RULE
+
+html{ 
+    font-size: 62.5%;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+// IMPORT FONT FAMILY
+
+@import url("https://use.typekit.net/uhd0mdv.css");
+$futura:  futura-pt, sans-serif;
+
+body {
+    font-family: $futura;
+    font-size: 3rem;
+}

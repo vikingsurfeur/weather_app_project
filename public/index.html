@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fetch API / JSON</title>
+        <link rel="stylesheet" href="./style/style.css" />
+    </head>
+    <body class="body">
+
+        <form class="form__city">
+            <label for="city__value">Choisissez votre localité</label>
+            <select name="city__value" id="city__value" class="form__city__select">
+                <option value="Carpentras" selected>Carpentras</option>
+                <option value="Avignon">Avignon</option>
+                <option value="Cavaillon">Cavaillon</option>
+                <option value="Pertuis">Pertuis</option>
+            </select>
+        </form>
+
+        <main class="main">
+            <div class="main__global__data">
+                <section class="main__weather">
+                    <img src="" alt="icon of current weather" class="main__weather__data">
+                </section>
+                <section class="main__temp">
+                    <p class="main__temp__data"></p>
+                </section>
+                <section class="main__pressure">
+                    <p class="main__pressure__data"></p>
+                </section>
+                <section class="main__humidity">
+                    <p class="main__humidity__data"></p>
+                </section>
+            </div>
+            <div class="main__wind">
+                <section class="main__wind__speed">
+                    <img src="./img/wind.png" alt="speed of wind" class="main__wind__speed__title">
+                    <p class="main__wind__speed__data"></p>
+                </section>
+                <section class="main__wind__direction">
+                    <img src="./img/wind_rose.png" alt="wind rose" class="main__wind__direction__title">
+                    <p class="main__wind__direction__data"></p>
+                </section>
+                <section class="main__wind__gust">
+                    <img src="./img/wing_gust.png" alt="wind gust" class="main__wind__gust__title">
+                    <p class="main__wind__gust__data"></p>
+                </section>
+            </div>
+            <section class="main__sunrise">
+                <img src="./img/sunrise.png" alt="sunrise icon" class="main__sunrise__title">
+                <p class="main__sunrise__data"></p>
+            </section>
+            <section class="main__sunset">
+                <img src="./img/sunset.png" alt="sunset icon" class="main__sunset__title">
+                <p class="main__sunset__data"></p>
+            </section>
+        </main>
+            
+        <script src="./app/main.js"></script>
+    </body>
+</html>
